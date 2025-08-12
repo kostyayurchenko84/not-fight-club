@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="./assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Forum&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      /*      document.getElementById('create-hero-btn').addEventListener('click', function () {
+              const heroNameInput = getElementById('hero-name')
+              const heroName = heroNameInput.value.trim()
+              if (heroName === '') {
+                alert('Please enter a hero name!')
+                return
+              }
+              localStorage.setItem('heroName', heroName)
+              alert(`Hero ${heroName} has been created!`)
+              localStorage.removeItem('heroName')
+            })
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const heroNameInput = document.getElementById('hero-name')
+        const createBtn = document.querySelector('.create-btn')
+        const notification = document.getElementById('notification')
+
+        const savedName = localStorage.getItem('heroName')
+        if (savedName) {
+          heroNameInput.value = savedName
+          showNotification(`Welcome back, ${savedName}!`, 'success')
+        }
+
+        createBtn.addEventListener('click', function () {
+          const heroName = heroNameInput.value.trim()
+          if (heroName === '') {
+            showNotification('Please enter a hero name', 'error')
+            return
+          }
+          localStorage.setItem('heroName', heroName)
+          showNotification(`Hero "${heroName}" created successfully!`, 'success')
+        })
+
+        function showNotification(message, type) {
+          notification.textContent = message
+          notification.style.display = 'block'
+          notification.style.backgroundColor = type === 'error' ? '#c62828' : '#2e7d32'
+
+          setTimeout(() => {
+            notification.style.display = 'none'
+          }, 3000)
+        }
+      })
+    </script>
+    <title>Not Fight Club</title>
+  </head>
+  <body>
+    <main>
+      <section class="SignIn roboto-regular">
+        <div class="container">
+          <h1>Create your hero</h1>
+          <div class="input-hero-name">
+            <label for="hero-name" class="roboto-bold">Hero Name:</label>
+            <input type="text" id="hero-name" placeholder="Enter your hero's name" />
+          </div>
+          <button class="create-btn">Create Hero</button>
+          <div id="notification" class="notification roboto-bold"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
