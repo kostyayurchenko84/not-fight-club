@@ -2,11 +2,9 @@
   --color-dark: #030303;
   --color-red: #710707;
   --color-gold: #9d8665;
-  --font-h2: 80px;
-  --font-text: 22px;
-  --font-text-height: 26px;
-  --margin: 75px;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 .roboto-regular {
   font-family: 'Roboto', sans-serif;
@@ -73,18 +71,6 @@ h1::after {
   border: 1px solid red;
 }
 
-a {
-  cursor: pointer;
-  text-decoration: none;
-  transition: color 0.5s;
-}
-
-a:hover,
-a:active {
-  color: var(--color-gold);
-  transition: color 0.5s;
-}
-
 .input-hero-name {
   margin-bottom: 30px;
   text-align: left;
@@ -135,8 +121,9 @@ a:active {
 }
 
 .notification {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 10px;
+  text-align: center;
   color: #fff;
   display: none;
 }

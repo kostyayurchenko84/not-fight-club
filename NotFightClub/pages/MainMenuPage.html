@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/mainmenustyle.css" />
+    <link rel="icon" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>NotFightClub</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const heroName = localStorage.getItem('heroName')
+        const heroTitle = document.getElementById('heroName')
+        heroName ? (heroTitle.textContent = heroName) : (heroTitle.textContent = 'Unknown Hero')
+      })
+    </script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1 id="heroName"></h2>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <h2>Main menu</h2>
+
+        <nav class="nav ">
+          <ul class="nav-list roboto-thin">
+            <li><a href="#visiting">Visiting</a></li>
+            <li><a href="#explore">Explore</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#tickets">Tickets</a></li>
+            <li><a href="#contacts">Contacts</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <h1>Your Hero Profile</h1>
+      <div id="heroProfile"></div>
+    </main>
+  </body>
+</html>

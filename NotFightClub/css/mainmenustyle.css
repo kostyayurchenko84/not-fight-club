@@ -1,0 +1,59 @@
+:root {
+  --color-dark: #030303;
+  --color-red: #710707;
+  --color-gold: #9d8665;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.roboto-regular {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.roboto-bold {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.roboto-thin {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-dark);
+  background-color: #fff;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font: 400 50px/1.5 'Forum', serif;
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-dark);
+}
+.header {
+  border-bottom: 2px solid var(--color-gold);
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0px auto;
+}
