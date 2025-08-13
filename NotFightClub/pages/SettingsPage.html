@@ -3,22 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="icon" href="./assets/favicon.ico" />
+    <link rel="stylesheet" href="../css/settingsstyle.css" />
+    <link rel="icon" href="../assets/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
+    <title>NotFightClub</title>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
+        const heroName = localStorage.getItem('heroName')
+        const heroTitle = document.getElementById('heroName')
         const heroNameInput = document.getElementById('hero-name')
+        heroName ? (heroTitle.textContent = heroName) : (heroTitle.textContent = 'Unknown Hero')
+
+        if (heroName) {
+          heroNameInput.value = heroName
+        } else {
+          heroNameInput.value = 'Unknown Hero'
+        }
+
         const heroForm = document.getElementById('heroForm')
         const notification = document.getElementById('notification')
-
-        const savedName = localStorage.getItem('heroName')
-        if (savedName) {
-          heroNameInput.value = savedName
-          showNotification(`Welcome back, ${savedName}!`, 'success')
-        }
 
         heroForm.addEventListener('submit', function (e) {
           e.preventDefault()
@@ -28,7 +32,7 @@
             return
           }
           localStorage.setItem('heroName', heroName)
-          showNotification(`Hero "${heroName}" created successfully!`, 'success')
+          showNotification(`Hero "${heroName}" edited successfully!`, 'success')
         })
 
         function showNotification(message, type) {
@@ -37,24 +41,25 @@
           notification.style.backgroundColor = type === 'error' ? '#c62828' : '#2e7d32'
 
           setTimeout(() => {
-            window.location.href = './pages/MainMenuPage.html'
+            window.location.href = '../pages/MainMenuPage.html'
           }, 3000)
         }
       })
     </script>
-    <title>Not Fight Club</title>
   </head>
   <body>
+    <header class="header">
+      <h1 id="heroName"></h1>
+    </header>
     <main>
-      <section class="roboto-regular">
+      <section class="editForm roboto-regular">
         <div class="container">
-          <h1>Create your hero</h1>
-          <form class="heroForm" id="heroForm">
+          <form id="heroForm">
             <div class="input-hero-name">
-              <label for="hero-name" class="roboto-bold">Hero Name:</label>
-              <input type="text" id="hero-name" placeholder="Enter your hero's name" required />
+              <label for="hero-name" class="roboto-bold">Edit Hero Name:</label>
+              <input type="text" id="hero-name" placeholder="Edit your hero's name" required />
             </div>
-            <button type="submit" class="create-btn">Create Hero</button>
+            <button type="submit" class="create-btn">Edit</button>
           </form>
           <div id="notification" class="notification roboto-bold"></div>
         </div>
