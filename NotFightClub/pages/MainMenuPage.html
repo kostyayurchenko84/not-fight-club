@@ -11,13 +11,16 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const heroName = localStorage.getItem('heroName')
-        const heroTitle = document.getElementById('heroName')
+        const heroTitle = document.querySelector('.heroName')
         heroName ? (heroTitle.textContent = heroName) : (heroTitle.textContent = 'Unknown Hero')
 
-        const quitLink = document.getElementById('quitLink')
+        const quitLink = document.querySelector('.quitLink')
         quitLink.addEventListener('click', function (e) {
           e.preventDefault()
           localStorage.removeItem('heroName')
+          localStorage.removeItem('wins')
+          localStorage.removeItem('loses')
+          localStorage.removeItem('avatar')
           window.location.href = '../index.html'
         })
       })
@@ -25,7 +28,7 @@
   </head>
   <body>
     <header class="header">
-      <h1 id="heroName"></h1>
+      <h1 class="heroName"></h1>
     </header>
     <main>
       <div class="container">
@@ -35,7 +38,7 @@
             <li><a href="#fight">Fight</a></li>
             <li><a href="AccountPage.html">Account</a></li>
             <li><a href="SettingsPage.html">Settings</a></li>
-            <li><a id="quitLink" href="#">Quit</a></li>
+            <li><a class="quitLink" href="../index.html">Quit</a></li>
           </ul>
         </nav>
       </div>

@@ -11,10 +11,11 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const heroNameInput = document.getElementById('hero-name')
-        const heroForm = document.getElementById('heroForm')
-        const notification = document.getElementById('notification')
+        const heroForm = document.querySelector('.heroForm')
+        const notification = document.querySelector('.notification')
 
         const savedName = localStorage.getItem('heroName')
+
         if (savedName) {
           heroNameInput.value = savedName
           showNotification(`Welcome back, ${savedName}!`, 'success')
@@ -28,6 +29,9 @@
             return
           }
           localStorage.setItem('heroName', heroName)
+          localStorage.setItem('avatar', 0)
+          localStorage.setItem('wins', 0)
+          localStorage.setItem('loses', 0)
           showNotification(`Hero "${heroName}" created successfully!`, 'success')
         })
 
@@ -49,14 +53,14 @@
       <section class="roboto-regular">
         <div class="container">
           <h1>Create your hero</h1>
-          <form class="heroForm" id="heroForm">
+          <form class="heroForm">
             <div class="input-hero-name">
               <label for="hero-name" class="roboto-bold">Hero Name:</label>
               <input type="text" id="hero-name" placeholder="Enter your hero's name" required />
             </div>
             <button type="submit" class="create-btn">Create Hero</button>
           </form>
-          <div id="notification" class="notification roboto-bold"></div>
+          <div class="notification roboto-bold"></div>
         </div>
       </section>
     </main>

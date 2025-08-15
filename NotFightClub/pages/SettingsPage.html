@@ -11,7 +11,7 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const heroName = localStorage.getItem('heroName')
-        const heroTitle = document.getElementById('heroName')
+        const heroTitle = document.querySelector('.heroName')
         const heroNameInput = document.getElementById('hero-name')
         heroName ? (heroTitle.textContent = heroName) : (heroTitle.textContent = 'Unknown Hero')
 
@@ -21,8 +21,8 @@
           heroNameInput.value = 'Unknown Hero'
         }
 
-        const heroForm = document.getElementById('heroForm')
-        const notification = document.getElementById('notification')
+        const heroForm = document.querySelector('.heroForm')
+        const notification = document.querySelector('.notification')
 
         heroForm.addEventListener('submit', function (e) {
           e.preventDefault()
@@ -49,21 +49,24 @@
   </head>
   <body>
     <header class="header">
-      <h1 id="heroName"></h1>
+      <h1 class="heroName"></h1>
     </header>
     <main>
       <section class="editForm roboto-regular">
         <div class="container">
-          <form id="heroForm">
+          <form class="heroForm">
             <div class="input-hero-name">
               <label for="hero-name" class="roboto-bold">Edit Hero Name:</label>
               <input type="text" id="hero-name" placeholder="Edit your hero's name" required />
             </div>
             <button type="submit" class="create-btn">Edit</button>
           </form>
-          <div id="notification" class="notification roboto-bold"></div>
+          <div class="notification roboto-bold"></div>
         </div>
       </section>
     </main>
+    <footer class="footer">
+      <a class="linkBack" href="../pages/MainMenuPage.html">Back</a>
+    </footer>
   </body>
 </html>
