@@ -97,11 +97,3 @@ h1::after {
   background-color: var(--color-dark);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 1);
 }
-
-.notification {
-  margin-top: 10px;
-  padding: 10px;
-  text-align: center;
-  color: #fff;
-  display: none;
-}

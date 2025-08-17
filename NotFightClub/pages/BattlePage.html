@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/battlesyle.css" />
+    <link rel="icon" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const savedName = localStorage.getItem('heroName')
+        const avatarIndex = localStorage.getItem('avatar') || 0
+
+        const avatars = [
+          '../assets/img/Krosh_400x389.jpg',
+          '../assets/img/Barash_400x389.jpg',
+          '../assets/img/Ezh_400x389.jpg',
+          '../assets/img/Kopatych_400x389.jpg',
+          '../assets/img/Krosh_400x389.jpg',
+          '../assets/img/Pin_400x389.jpg',
+          '../assets/img/Sova_400x389.jpg',
+        ]
+        const pcAvatars = [
+          '../assets/img/Pokemon1.jpg',
+          '../assets/img/Pokemon2.jpg',
+          '../assets/img/Pokemon3.jpg',
+          '../assets/img/Pokemon4.jpg',
+        ]
+
+        const currentAvatar = document.querySelector('.currentAvatar')
+        if (avatars[avatarIndex]) {
+          currentAvatar.src = avatars[avatarIndex]
+        }
+
+          const pcAvatar = document.querySelector('.pcAvatar');
+          const randomPcAvatarIndex = Math.floor(Math.random() * pcAvatars.length);
+          pcAvatar.src = pcAvatars[randomPcAvatarIndex];          
+          //localStorage.setItem('pcAvatarIndex', randomPcAvatarIndex);
+
+      })
+    </script>
+    <title>Not Fight Club</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Battle</h1>
+    </header>
+    <main>
+      <section class="battle-section roboto-regular">
+        <div class="container">
+        <div class="heroData"><img class="currentAvatar" src="../assets/img/Krosh_400x389.jpg" alt="currentAvatar"></div>
+        <div class="battleData">battle</div>
+        <div class="pcData"><img class="pcAvatar" src="../assets/img/Pokemon1.jpg" alt="pcAvatar"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <a class="linkBack" href="../pages/MainMenuPage.html">Back</a>
+    </footer>
+  </body>
+</html>
