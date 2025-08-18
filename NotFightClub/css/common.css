@@ -32,9 +32,6 @@ html {
   width: 100%;
 }
 
-
-
-
 .notification {
   margin-top: 10px;
   padding: 10px;
@@ -46,25 +43,31 @@ html {
 .footer {
   margin: 15px 0 15px 10px;
 }
-.footer a {
+.footer a,
+.battle-btn {
   color: var(--color-dark);
   text-decoration: none;
   font: 700 40px/1.1 'Forum', serif;
   letter-spacing: 2px;
-  padding: 10px 40px;
+  padding: 10px 30px;
   position: relative;
   transition: all 0.3s ease;
   display: inline-block;
   min-width: 200px;
   text-transform: uppercase;
+  border: 3px solid var(--color-gold);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
-.footer a:hover {
+.footer a:hover,
+.battle-btn:hover {
   color: var(--color-gold);
   transform: scale(1.05);
 }
 
-.footer a::before {
+.footer a::before,
+.battle-btn::before {
   content: '';
   position: absolute;
   top: 0;
@@ -79,6 +82,7 @@ html {
   border-radius: 3px;
 }
 
-.footer a:hover::before {
+.footer a:hover::before,
+.battle-btn:hover::before {
   transform: scaleX(1);
 }
