@@ -136,3 +136,31 @@ main {
 .battle-btn {
   margin-top: 30px;
 }
+
+.battle-log {
+  margin: 40px auto;
+  padding: 15px;
+  width: 90%;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.battle-log h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.log-content {
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.log-content p {
+  margin: 5px 0;
+  line-height: 1.4;
+}

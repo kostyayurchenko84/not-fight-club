@@ -64,6 +64,14 @@
             }
           })
         })
+
+        function addLogMessage(message) {
+          const logContent = document.querySelector('.log-content')
+          const messageElement = document.createElement('p')
+          messageElement.textContent = message
+          logContent.appendChild(messageElement)
+          logContent.scrollTop = logContent.scrollHeight
+        }
       })
     </script>
     <title>Not Fight Club</title>
@@ -142,6 +150,12 @@
               <div class="hp-bar" data-hp="150"></div>
               <span class="hp-text">150/150</span>
             </div>
+          </div>
+        </div>
+        <div class="battle-log">
+          <h3>Battle Log:</h3>
+          <div class="log-content">
+            <p>Battle log here</p>
           </div>
         </div>
       </section>
