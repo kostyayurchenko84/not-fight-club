@@ -147,7 +147,7 @@ main {
 }
 
 .battle-log h3 {
-  margin-top: 0;
+  margin: 5px auto;
   color: #333;
 }
 
@@ -163,4 +163,9 @@ main {
 .log-content p {
   margin: 5px 0;
   line-height: 1.4;
+}
+
+.log-content span {
+  color: var(--color-red);
+  font-weight: 700;
 }
