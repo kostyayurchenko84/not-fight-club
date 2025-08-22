@@ -1,0 +1,111 @@
+@import url('./common.css');
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-dark);
+  background-color: #fff;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  border-bottom: 2px solid var(--color-gold);
+  padding: 10px 0;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.header h1 {
+  margin: 0;
+  font: 400 50px/1.5 'Forum', serif;
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-dark);
+  color: var(--color-red);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.header h1:hover {
+  color: var(--color-gold);
+  transform: scale(1.02);
+}
+
+.editForm {
+  width: 100%;
+  max-width: 500px;
+  min-height: 250px;
+  max-height: 20vh;
+  margin-top: 200px;
+  padding: 60px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.input-hero-name {
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.input-hero-name label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-dark);
+  letter-spacing: 1px;
+}
+
+.input-hero-name input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  font-size: var(--font-text);
+  line-height: var(--font-text-height);
+  transition: border-color 0.3s;
+}
+
+.input-hero-name input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.create-btn {
+  display: block;
+  min-width: 200px;
+  margin: 20px auto 0;
+  padding: 15px 40px;
+  background-color: var(--color-red);
+  color: #fff;
+  border: none;
+  font-size: var(--font-text);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.create-btn:hover {
+  background-color: var(--color-dark);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 1);
+}
+
+.notification {
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+  display: none;
+}
+
+

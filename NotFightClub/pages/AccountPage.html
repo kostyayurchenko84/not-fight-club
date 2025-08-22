@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Page</title>
+    <link rel="stylesheet" href="../css/accountstyle.css" />
+    <link rel="icon" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const avatars = [
+          '../assets/img/Krosh_400x389.jpg',
+          '../assets/img/Barash_400x389.jpg',
+          '../assets/img/Ezh_400x389.jpg',
+          '../assets/img/Kopatych_400x389.jpg',
+          '../assets/img/Krosh_400x389.jpg',
+          '../assets/img/Pin_400x389.jpg',
+          '../assets/img/Sova_400x389.jpg',
+        ]
+        const heroName = localStorage.getItem('heroName')
+        const heroTitle = document.querySelector('.heroName')
+        heroName ? (heroTitle.textContent = heroName) : (heroTitle.textContent = 'Unknown Hero')
+
+        const wins = localStorage.getItem('wins') || 0
+        const loses = localStorage.getItem('loses') || 0
+        document.querySelector('.statWins span').textContent = wins
+        document.querySelector('.statLoses span').textContent = loses
+
+        const avatarIndex = localStorage.getItem('avatar') || 0
+        const currentAvatar = document.querySelector('.currentAvatar')
+        if (avatars[avatarIndex]) {
+          currentAvatar.src = avatars[avatarIndex]
+        }
+
+        document.querySelectorAll('.changeAvatar img').forEach((img, index) => {
+          img.addEventListener('click', function () {
+            currentAvatar.src = avatars[index]
+            localStorage.setItem('avatar', index)
+
+            document.querySelectorAll('.changeAvatar img').forEach((i) => {
+              i.classList.remove('selected')
+            })
+            this.classList.add('selected')
+          })
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="heroName"></h1>
+    </header>
+    <main>
+      <section class="avatar">
+        <div class="container">
+          <div class="currentHero">
+            <img class="currentAvatar" src="../assets/img/Krosh_400x389.jpg" alt="Current hero" />
+            <p class="statWins">Wins: <span>0</span></p>
+            <p class="statLoses">Loses: <span>0</span></p>
+          </div>
+          <div class="changeAvatar">
+            <img src="../assets/img/Krosh_200.jpg" alt="Krosh" />
+            <img src="../assets/img/Barash_200.jpg" alt="Barash" />
+            <img src="../assets/img/Ezhik_200.jpg" alt="Ezhik" />
+            <img src="../assets/img/Kopatych_200.jpg" alt="Kopatych" />
+            <img src="../assets/img/Pin_200.jpg" alt="Pin" />
+            <img src="../assets/img/Sova_200.jpg" alt="Sova" />
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <a class="linkBack" href="../pages/MainMenuPage.html">Back</a>
+    </footer>
+  </body>
+</html>

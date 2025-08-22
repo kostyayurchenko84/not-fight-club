@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="icon" href="./assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const heroNameInput = document.getElementById('hero-name')
+        const heroForm = document.querySelector('.heroForm')
+        const notification = document.querySelector('.notification')
+
+        const savedName = localStorage.getItem('heroName')
+
+        if (savedName) {
+          heroNameInput.value = savedName
+          showNotification(`Welcome back, ${savedName}!`, 'success')
+        }
+
+        heroForm.addEventListener('submit', function (e) {
+          e.preventDefault()
+          const heroName = heroNameInput.value.trim()
+          if (heroName === '') {
+            showNotification('Please enter a hero name', 'error')
+            return
+          }
+          localStorage.setItem('heroName', heroName)
+          localStorage.setItem('avatar', 0)
+          localStorage.setItem('wins', 0)
+          localStorage.setItem('loses', 0)
+          showNotification(`Hero "${heroName}" created successfully!`, 'success')
+        })
+
+        function showNotification(message, type) {
+          notification.textContent = message
+          notification.style.display = 'block'
+          notification.style.backgroundColor = type === 'error' ? '#c62828' : '#2e7d32'
+
+          setTimeout(() => {
+            window.location.href = './pages/MainMenuPage.html'
+          }, 3000)
+        }
+      })
+    </script>
+    <title>Not Fight Club</title>
+  </head>
+  <body>
+    <main>
+      <section class="roboto-regular">
+        <div class="container">
+          <h1>Create your hero</h1>
+          <form class="heroForm">
+            <div class="input-hero-name">
+              <label for="hero-name" class="roboto-bold">Hero Name:</label>
+              <input type="text" id="hero-name" placeholder="Enter your hero's name" required />
+            </div>
+            <button type="submit" class="create-btn">Create Hero</button>
+          </form>
+          <div class="notification roboto-bold"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

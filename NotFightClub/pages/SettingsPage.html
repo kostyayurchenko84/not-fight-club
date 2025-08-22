@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/settingsstyle.css" />
+    <link rel="icon" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>NotFightClub</title>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const heroName = localStorage.getItem('heroName')
+        const heroTitle = document.querySelector('.heroName')
+        const heroNameInput = document.getElementById('hero-name')
+        heroName ? (heroTitle.textContent = heroName) : (heroTitle.textContent = 'Unknown Hero')
+
+        if (heroName) {
+          heroNameInput.value = heroName
+        } else {
+          heroNameInput.value = 'Unknown Hero'
+        }
+
+        const heroForm = document.querySelector('.heroForm')
+        const notification = document.querySelector('.notification')
+
+        heroForm.addEventListener('submit', function (e) {
+          e.preventDefault()
+          const heroName = heroNameInput.value.trim()
+          if (heroName === '') {
+            showNotification('Please enter a hero name', 'error')
+            return
+          }
+          localStorage.setItem('heroName', heroName)
+          showNotification(`Hero "${heroName}" edited successfully!`, 'success')
+        })
+
+        function showNotification(message, type) {
+          notification.textContent = message
+          notification.style.display = 'block'
+          notification.style.backgroundColor = type === 'error' ? '#c62828' : '#2e7d32'
+
+          setTimeout(() => {
+            window.location.href = '../pages/MainMenuPage.html'
+          }, 3000)
+        }
+      })
+    </script>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="heroName"></h1>
+    </header>
+    <main>
+      <section class="editForm roboto-regular">
+        <div class="container">
+          <form class="heroForm">
+            <div class="input-hero-name">
+              <label for="hero-name" class="roboto-bold">Edit Hero Name:</label>
+              <input type="text" id="hero-name" placeholder="Edit your hero's name" required />
+            </div>
+            <button type="submit" class="create-btn">Edit</button>
+          </form>
+          <div class="notification roboto-bold"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <a class="linkBack" href="../pages/MainMenuPage.html">Back</a>
+    </footer>
+  </body>
+</html>

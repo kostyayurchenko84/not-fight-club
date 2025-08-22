@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/battlesyle.css" />
+    <link rel="icon" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const heroName = localStorage.getItem('heroName')
+        const avatarIndex = localStorage.getItem('avatar') || 0
+
+        let wins = parseInt(localStorage.getItem('wins') || 0, 10)
+        let loses = parseInt(localStorage.getItem('loses') || 0, 10)
+
+        const avatars = [
+          '../assets/img/Krosh_400x389.jpg',
+          '../assets/img/Barash_400x389.jpg',
+          '../assets/img/Ezh_400x389.jpg',
+          '../assets/img/Kopatych_400x389.jpg',
+          '../assets/img/Krosh_400x389.jpg',
+          '../assets/img/Pin_400x389.jpg',
+          '../assets/img/Sova_400x389.jpg',
+        ]
+        const pcAvatars = [
+          '../assets/img/Pokemon1_400.jpg',
+          '../assets/img/Pokemon2_400.jpg',
+          '../assets/img/Pokemon3_400.jpg',
+          '../assets/img/Pokemon4_400.jpg',
+        ]
+
+        const currentAvatar = document.querySelector('.currentAvatar')
+        if (avatars[avatarIndex]) {
+          currentAvatar.src = avatars[avatarIndex]
+        }
+
+        const pcAvatar = document.querySelector('.pcAvatar')
+        const randomPcAvatarIndex = Math.floor(Math.random() * pcAvatars.length)
+        pcAvatar.src = pcAvatars[randomPcAvatarIndex]
+
+        document.querySelector('.playerName').textContent = heroName
+        document.querySelector('.pcName').textContent = `Monster ${randomPcAvatarIndex}`
+
+        //localStorage.setItem('pcAvatarIndex', randomPcAvatarIndex);
+
+        const attackCheckboxes = document.querySelectorAll('.attack')
+        attackCheckboxes.forEach((checkbox) => {
+          checkbox.addEventListener('change', function () {
+            if (this.checked) {
+              attackCheckboxes.forEach((cb) => {
+                if (cb !== this) cb.checked = false
+              })
+            }
+          })
+        })
+
+        const defenseCheckboxes = document.querySelectorAll('.defense')
+        defenseCheckboxes.forEach((checkbox) => {
+          checkbox.addEventListener('change', function () {
+            const checked = document.querySelectorAll('.defense:checked').length
+            if (checked > 2) {
+              this.checked = false
+              alert('You can choose only two defense zones.')
+            }
+          })
+        })
+
+        function addLogMessage(message) {
+          const logContent = document.querySelector('.log-content')
+          const messageElement = document.createElement('p')
+          messageElement.innerHTML = message
+          //messageElement.textContent = message
+          logContent.appendChild(messageElement)
+          logContent.scrollTop = logContent.scrollHeight
+        }
+
+        function updateHP(player, damage) {
+          const hpText = document.querySelector(`.${player}Data .hp-text`)
+          const [current, max] = hpText.textContent.split('/').map(Number)
+          const newHP = Math.max(0, current - damage)
+          hpText.textContent = `${newHP}/${max}`
+
+          const hpBar = document.querySelector(`.${player}Data .hp-bar`)
+          const percent = (newHP / max) * 100
+          hpBar.style.width = `${percent}%`
+        }
+
+        const battleBtn = document.querySelector('.battle-btn')
+        battleBtn.addEventListener('click', function () {
+          const attackZoneHero = document.querySelector('.attack:checked').value
+          const defenseZonesHero = Array.from(document.querySelectorAll('.defense:checked')).map((cb) => cb.value)
+          if (!attackZoneHero || defenseZonesHero.length < 2) {
+            alert('You must choose attack and defense zones.')
+            return
+          }
+
+          const attackZonePc = ['head', 'neck', 'body', 'belly', 'legs'][Math.floor(Math.random() * 5)]
+          const defenseZonesPc = []
+          while (defenseZonesPc.length < 2) {
+            const zone = ['head', 'neck', 'body', 'belly', 'legs'][Math.floor(Math.random() * 5)]
+            if (!defenseZonesPc.includes(zone)) {
+              defenseZonesPc.push(zone)
+            }
+          }
+
+          const heroDamage = defenseZonesPc.includes(attackZoneHero) ? 0 : 75
+          const pcDamage = defenseZonesHero.includes(attackZonePc) ? 0 : 75
+
+          updateHP('pc', heroDamage)
+          updateHP('hero', pcDamage)
+
+          addLogMessage(`You attacked <span>${attackZoneHero}</span> for <span>${heroDamage}</span> damage!`)
+          addLogMessage(`Monster attacked <span>${attackZonePc}</span> for <span>${pcDamage}</span> damage!`)
+          if (checkGameOver()) {
+            battleBtn.disabled = true
+
+            attackCheckboxes.forEach((cb) => {
+              cb.disabled = true
+            })
+            defenseCheckboxes.forEach((cb) => {
+              cb.disabled = true
+            })
+
+            setTimeout(() => {
+              window.location.href = '../pages/MainMenuPage.html'
+            }, 3000)
+          }
+        })
+
+        function checkGameOver() {
+          const heroHP = parseInt(document.querySelector('.heroData .hp-text').textContent.split('/')[0])
+          const pcHP = parseInt(document.querySelector('.pcData .hp-text').textContent.split('/')[0])
+
+          if (heroHP <= 0 && pcHP <= 0) {
+            addLogMessage('Its draw!')
+            return true
+          } else if (heroHP <= 0) {
+            localStorage.setItem('loses', loses + 1)
+            addLogMessage('You lose! Monster is win.')
+            return true
+          } else if (pcHP <= 0) {
+            localStorage.setItem('wins', wins + 1)
+            addLogMessage('You win! The monster lose!')
+            return true
+          }
+          return false
+        }
+      })
+    </script>
+    <title>Not Fight Club</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1>Battle</h1>
+    </header>
+    <main>
+      <section class="battle-section roboto-regular">
+        <div class="container">
+          <div class="heroData">
+            <p class="playerName"></p>
+            <img class="currentAvatar" src="../assets/img/Krosh_400x389.jpg" alt="currentAvatar" />
+            <div class="hp-bar-container">
+              <div class="hp-bar" data-hp="150"></div>
+              <span class="hp-text">150/150</span>
+            </div>
+          </div>
+          <div class="battleData">
+            <p>Pick one Attack zone and two Defense zone:</p>
+            <div class="battle-options">
+              <div class="battle-list-options">
+                <h3>Attack zone</h3>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="attack-head" class="attack" value="head" checked />
+                  <label for="attack-head">Head</label>
+                </div>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="attack-neck" class="attack" value="neck" />
+                  <label for="attack-neck">Neck</label>
+                </div>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="attack-body" class="attack" value="body" />
+                  <label for="attack-body">Body</label>
+                </div>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="attack-belly" class="attack" value="belly" />
+                  <label for="attack-belly">Belly</label>
+                </div>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="attack-legs" class="attack" value="legs" />
+                  <label for="attack-legs">Legs</label>
+                </div>
+              </div>
+              <div class="battle-list-options">
+                <h3>Defense zone</h3>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="defense-head" class="defense" value="head" checked />
+                  <label for="defense-head">Head</label>
+                </div>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="defense-neck" class="defense" value="neck" />
+                  <label for="defense-neck">Neck</label>
+                </div>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="defense-body" class="defense" value="body" />
+                  <label for="defense-body">Body</label>
+                </div>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="defense-belly" class="defense" value="belly" />
+                  <label for="defense-belly">Belly</label>
+                </div>
+                <div class="battle-option-group">
+                  <input type="checkbox" id="defense-legs" class="defense" value="legs" />
+                  <label for="defense-legs">Legs</label>
+                </div>
+              </div>
+            </div>
+            <button class="battle-btn">Attack!</button>
+          </div>
+          <div class="pcData">
+            <p class="pcName"></p>
+            <img class="pcAvatar" src="../assets/img/Pokemon1_400.jpg" alt="pcAvatar" />
+            <div class="hp-bar-container">
+              <div class="hp-bar" data-hp="150"></div>
+              <span class="hp-text">150/150</span>
+            </div>
+          </div>
+        </div>
+        <div class="battle-log">
+          <h3>Log events:</h3>
+          <div class="log-content">
+            <p>Press Attack! to start battle</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <a class="linkBack" href="../pages/MainMenuPage.html">Back</a>
+    </footer>
+  </body>
+</html>
